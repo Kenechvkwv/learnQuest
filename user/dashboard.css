@@ -775,6 +775,7 @@ a {
   margin: 0 auto;
   padding: 20px;
 }
+
 .section {
   background-color: #fff;
   border-radius: 10px;
@@ -798,6 +799,37 @@ a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   box-shadow: 1px 1px 1px 1px #5b47ed;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .section {
+    padding: 20px;
+  }
+
+  .section-heading {
+    font-size: 24px;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+  }
+
+  .card-icon {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-heading {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 15px;
+  }
 }
 
 .card:hover {

@@ -97,9 +97,10 @@ if (isset($_GET['logout'])) {
                 <div class="tab_name">
                     <p>Student</p>
                 </div>
-                <div class="three_dots">
+                <button class="logoutBtn subscribeBtn">Subscribe ($5/month)</button>
+                <!-- <div class="three_dots">
                     <i class='bx bx-dots-vertical-rounded'></i>
-                </div>
+                </div> -->
             </div>
 
             <div class="container">
@@ -270,8 +271,8 @@ if (isset($_GET['logout'])) {
         function sendMessage() {
             var userInput = document.getElementById("userInput").value;
 
-            // Make an API call to your Python script
-            fetch('./api/chat.py', {
+            // Make an API call to your PHP script
+            fetch('./api/chat.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -282,15 +283,43 @@ if (isset($_GET['logout'])) {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Chatbot Response:", data.response);
-                    // Update the modal content with the chatbot's response
-                    var modalContent = document.querySelector('.modal-content');
-                    modalContent.innerHTML += `<p class="chatbot-message">${data.response}</p>`;
+                    console.log("Response Data:", data);
+                    if (data.response) {
+                        console.log("Chatbot Response:", data.response);
+                        // Update the modal content with the chatbot's response
+                        var modalContent = document.querySelector('.modal-content');
+                        modalContent.innerHTML += `<p class="chatbot-message">${data.response}</p>`;
+                    } else {
+                        console.error('Error:', data.error);
+                    }
                 })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const subscribeBtn = document.querySelector('.subscribeBtn');
+
+            subscribeBtn.addEventListener('click', function() {
+                // Change button text to "Subscribing..."
+                subscribeBtn.textContent = 'Subscribing...';
+
+                // Disable button to prevent multiple clicks
+                subscribeBtn.disabled = true;
+
+                // Wait for 2 seconds
+                setTimeout(function() {
+                    // Change button text to "Subscribed"
+                    subscribeBtn.textContent = 'Subscribed';
+
+                    // Re-enable the button
+                    subscribeBtn.disabled = false;
+                }, 2000);
+            });
+        });
     </script>
 </body>
 
